@@ -19,13 +19,26 @@ class Account:
 
 
 
-account = Account("balance.txt")
-print(account.balance)
+class Checking(Account):
+    def __init__(self,filepath, fee):
+        self.fee = fee
+        Account.__init__(self, filepath)
 
-account.withdraw(50)
-print(account.balance)
+    def transfer(self, amount):
+        self.balance = self.balance - amount - self.fee
 
-account.deposit(500)
-print(account.balance)
-
-account.commit()
+checking = Checking("balance.txt", 50)
+checking.transfer(200)
+print(checking.balance)
+checking.commit()
+print(checking.balance)
+# account = Account("balance.txt")
+# print(account.balance)
+#
+# account.withdraw(50)
+# print(account.balance)
+#
+# account.deposit(500)
+# print(account.balance)
+#
+# account.commit()
